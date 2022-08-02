@@ -1,0 +1,18 @@
+func openFile(
+    _ fullPath: String,
+    withApplication appName: String?
+) -> Bool
+
+let str = "string"
+let filename = getDocumentsDirectory().appendingPathComponent("output.txt")
+
+do {
+    try str.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+} catch {
+    // failed to write file – bad permissions / filename / missing permissions or more likely it can't be converted to the encoding
+}
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
